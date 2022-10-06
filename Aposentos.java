@@ -10,23 +10,22 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import Hotel.BancoDeDados;
-import Model.Funcionario;
+import Model.Aposento;
 
-public class Funcionarios extends JFrame{
+public class Aposentos extends JFrame{
 	private JButton btnNovo;
 	private JButton btnAlterar;
 	private JButton btnRemover;
 	private static JTable tabela;
-	private static String [] colunas = {"Codigo", "Nome", "Cargo", "Salario", "CPF", "Telefone"};
+	private static String [] colunas = {"C�digo", "N�mero", "Descri��o", "Valor"};
 	
 	private static Object [][] dados = {};
 
-	public Funcionarios() {
-		super("Funcionarios");
+	public Aposentos() {
+		super("Aposentos");
 		initComponents();
         atualizaTabela();
 	}
@@ -42,12 +41,6 @@ public class Funcionarios extends JFrame{
 		TableModel tableModel = new DefaultTableModel(dados,colunas);
 		//tabela = new JTable(dados,colunas);
 		tabela = new JTable(tableModel);
-		tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); 
-		int vColIndex = 5;
-		 TableColumn col = tabela.getColumnModel().getColumn(vColIndex);
-		 int width = 100;
-		 col.setPreferredWidth(width);
-		
 		JScrollPane barraRolagem = new JScrollPane(tabela);		
 		
 		setLayout(null);
@@ -60,7 +53,6 @@ public class Funcionarios extends JFrame{
 		btnAlterar.setBounds(105, 10, 100, 20);
 		btnRemover.setBounds(205, 10, 100, 20);
 		barraRolagem.setBounds(10,40,300,100);
-		tabela.setBounds(10,30, 200, 200);
 		setSize(400,200);
 		
 		btnNovo.addActionListener(
@@ -94,16 +86,16 @@ public class Funcionarios extends JFrame{
 						int linhaSelecionada = tabela.getSelectedRow();
 						
 						if(linhaSelecionada >= 0) {
-							int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir o(a) funcionario(a)?");
+							int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir o aposento?");
 							
 							if(resposta == JOptionPane.YES_OPTION) {
-								 Funcionario funcionario = BancoDeDados.getFuncionarios().get(linhaSelecionada);
-						         BancoDeDados.removeFuncionario(funcionario);
+								 Aposento aposento = BancoDeDados.getAposentos().get(linhaSelecionada);
+						         BancoDeDados.removeAposento(aposento);
 
 						         atualizaTabela();
 							}
 						}else {
-							JOptionPane.showMessageDialog(null, "e necessario selecionar um funcionario", "Funcionario",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "� necess�rio selecionar um aposento", "Aposento",JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 				});
@@ -114,23 +106,18 @@ public class Funcionarios extends JFrame{
         TableModel tTabela = (DefaultTableModel) tabela.getModel();
         ((DefaultTableModel) tTabela).setNumRows(0);
 
-        List<Funcionario> funcionarios = BancoDeDados.getFuncionarios();
+        List<Aposento> aposentos = BancoDeDados.getAposentos();
 
-        for (int linha = 0; linha < funcionarios.size(); linha++){
-            Funcionario funcionario = funcionarios.get(linha);
+        for (int linha = 0; linha < aposentos.size(); linha++){
+            Aposento aposento = aposentos.get(linha);
 
             ((DefaultTableModel) tTabela).addRow(new Object[]{1});
 
-            tabela.setValueAt(funcionario.getCodigo(), linha, 0);
-            tabela.setValueAt(funcionario.getNome(), linha, 1);
-            tabela.setValueAt(funcionario.getCargo(), linha, 2);
-            tabela.setValueAt(funcionario.getSalario(), linha, 3);
-            tabela.setValueAt(funcionario.getCpf(), linha, 4);
-            tabela.setValueAt(funcionario.getTelefone(), linha, 5);
-           
+            tabela.setValueAt(aposento.getCodigo(), linha, 0);
+            tabela.setValueAt(aposento.getNumero(), linha, 1);
+            tabela.setValueAt(aposento.getDescricao(), linha, 2);
+            tabela.setValueAt(aposento.getValor(), linha, 3);
         }
 
     }
-
 }
-
