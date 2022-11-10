@@ -1,0 +1,5 @@
+- - Anotations - -
+@Entity: Essa anotação indica que essa classe será uma entidade JPA, cria a tabela;
+@Table: indica o nome da tabela criada.
+@Id: indica que o atributo é primary key
+@GeneratedValue: define a estratégia que o id vai usar
