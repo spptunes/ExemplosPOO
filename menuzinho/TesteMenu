@@ -1,0 +1,95 @@
+package view;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class TesteMenu extends JFrame{
+    private JPanel painelMenu;
+    private JLabel FundoMenu;
+    private ImageIcon imgFundoMenu = new ImageIcon ("Imagens/fundo pop-up menu.png");
+    private ImageIcon imgBtMenu = new ImageIcon("Imagens/botao-menu.png"),
+            imgBtContinuar = new ImageIcon("Imagens/botao continuar.png"),
+            imgBtReiniciar = new ImageIcon("Imagens/botao reiniciar.png"),
+            imgBtSair = new ImageIcon("Imagens/botao sair.png");
+    private JButton btMenu, btContinuar, btReiniciar, btSair;
+
+    public TesteMenu() {
+        super("Testezinho Pop-up menu");
+        setLayout(null);
+        setSize(1366, 768);
+        this.getContentPane().setBackground(new Color(200, 133, 238));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        //instanciacao dos componentes
+        btMenu = new JButton(imgBtMenu);
+        
+        //metodos
+        configuraBtMenu();
+        
+        setVisible(true);
+    }
+    
+    //configuracao do botao menu
+    private void configuraBtMenu() {
+        btMenu.setBounds(1220, 30, 100, 105);
+        btMenu.setBorderPainted(false);
+        btMenu.setFocusable(false);
+        btMenu.setContentAreaFilled(false);
+        add(btMenu);
+        btMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub 
+                painelMenu.setVisible(true);
+            }});
+    }
+    
+    private void configPanelMenu() {
+        painelMenu = new JPanel();
+        painelMenu.setLayout(null);
+        painelMenu.setBounds(383, 84, 600, 600);
+        add(painelMenu);
+        painelMenu.setOpaque(false);
+        
+        FundoMenu = new JLabel(imgFundoMenu);
+        FundoMenu.setBounds(383, 84, 600, 600);
+       
+        btContinuar = new JButton(imgBtContinuar);
+        btContinuar.setBounds(57, 35, 300, 300);
+        btContinuar.setBorderPainted(false);
+        btContinuar.setFocusable(false);
+        btContinuar.setContentAreaFilled(false);
+        
+        btReiniciar = new JButton(imgBtReiniciar);
+        btReiniciar.setBounds(57, 109, 300, 300);
+        btReiniciar.setBorderPainted(false);
+        btReiniciar.setFocusable(false);
+        btReiniciar.setContentAreaFilled(false);
+        
+        btSair = new JButton(imgBtSair);
+        btSair.setBounds(0, 183, 300, 300);
+        btSair.setBorderPainted(false);
+        btSair.setFocusable(false);
+        btSair.setContentAreaFilled(false);
+        
+        //adicionando os componentes ao JPanel
+        add(FundoMenu);
+        painelMenu.add(btContinuar);
+        painelMenu.add(btReiniciar);
+        painelMenu.add(btSair);
+        
+        painelMenu.setVisible(false);
+        
+    }
+    
+    public static void main (String[] args) {
+        new TesteMenu();
+    }
+
+}
